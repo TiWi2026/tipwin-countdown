@@ -42,8 +42,8 @@ def generate_image():
         minutes = (total % 3600)  // 60
         seconds = total % 60
 
-    W, H   = 530, 140
-    radius = 70
+    W, H   = 530, 118
+    radius = 59
     img    = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     draw   = ImageDraw.Draw(img)
     draw.rounded_rectangle([(0, 0), (W - 1, H - 1)], radius=radius, fill=(*RED, 255))
