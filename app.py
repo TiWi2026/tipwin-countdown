@@ -48,8 +48,8 @@ def generate_image():
     draw   = ImageDraw.Draw(img)
     draw.rounded_rectangle([(0, 0), (W - 1, H - 1)], radius=radius, fill=(*RED, 255))
 
-    font_num   = get_font(50, bold=True)
-    font_label = get_font(17)
+    font_num   = get_font(62, bold=True)
+    font_label = get_font(18)
 
     units     = [(str(days).zfill(2), 'TAGE'),
                  (str(hours).zfill(2), 'STUNDEN'),
@@ -65,7 +65,7 @@ def generate_image():
     total_h        = num_h + gap + label_h
     num_y          = (H - total_h) // 2
 
-    content_w = 400
+    content_w = 470
     x_offset  = (W - content_w) // 2
     col_w     = content_w // 4
 
