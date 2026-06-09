@@ -82,12 +82,14 @@ def generate_image():
         lw    = bbox2[2] - bbox2[0]
         draw.text((cx - lw // 2, num_y + num_h + gap), label, fill=WHITE, font=font_label)
 
-        # Trennpunkt – vertikal zentriert mit Zahlen (bbox-Offsets berücksichtigt)
+        # Trennpunkt – horizontal und vertikal zentriert zwischen den Spalten
         if i < 3:
             colon_bbox = draw.textbbox((0, 0), ':', font=font_num)
+            colon_w    = colon_bbox[2] - colon_bbox[0]
             colon_h    = colon_bbox[3] - colon_bbox[1]
+            colon_x    = x_offset + (i + 1) * col_w - colon_w // 2
             colon_y    = num_y + num_ref_bbox[1] + (num_h - colon_h) // 2 - colon_bbox[1]
-            draw.text((x_offset + i * col_w + col_w - 4, colon_y), ':', fill=WHITE, font=font_num)
+            draw.text((colon_x, colon_y), ':', fill=WHITE, font=font_num)
 
     buf = io.BytesIO()
     img.save(buf, format='PNG', optimize=True)
