@@ -48,7 +48,7 @@ def generate_image():
     draw   = ImageDraw.Draw(img)
     draw.rounded_rectangle([(0, 0), (W - 1, H - 1)], radius=radius, fill=(*RED, 255))
 
-    font_num   = get_font(82, bold=True)
+    font_num   = get_font(56, bold=True)
     font_label = get_font(16)
 
     units     = [(str(days).zfill(2), 'TAGE'),
