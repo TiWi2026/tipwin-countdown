@@ -21,7 +21,7 @@ def get_font(size, bold=False):
         r'C:\Windows\Fonts\verdanab.ttf' if bold else r'C:\Windows\Fonts\verdana.ttf',
         r'C:\Windows\Fonts\calibrib.ttf' if bold else r'C:\Windows\Fonts\calibri.ttf',
         # Linux
-        f'/usr/share/fonts/truetype/dejavu/DejaVuSans{"Bold" if bold else ""}.ttf',
+        f'/usr/share/fonts/truetype/dejavu/DejaVuSans{"-Bold" if bold else ""}.ttf',
         f'/usr/share/fonts/truetype/liberation/LiberationSans-{"Bold" if bold else "Regular"}.ttf',
     ]
     for path in paths:
