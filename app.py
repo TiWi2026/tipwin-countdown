@@ -1,4 +1,4 @@
-from flask import Flask, make_response
+from flask import Flask, make_response, request
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime, timezone
 import io
@@ -29,7 +29,7 @@ def get_font(size, bold=False):
             return ImageFont.truetype(path, size)
     return ImageFont.load_default()
 
-def generate_image():
+def generate_image(lang='de'):
     now  = datetime.now(timezone.utc)
     diff = TARGET - now
 
@@ -51,10 +51,15 @@ def generate_image():
     font_num   = get_font(56, bold=True)
     font_label = get_font(16)
 
-    units     = [(str(days).zfill(2), 'TAGE'),
-                 (str(hours).zfill(2), 'STUNDEN'),
-                 (str(minutes).zfill(2), 'MINUTEN'),
-                 (str(seconds).zfill(2), 'SEKUNDEN')]
+    if lang == 'en':
+        labels = ['DAYS', 'HOURS', 'MINUTES', 'SECONDS']
+    else:
+        labels = ['TAGE', 'STUNDEN', 'MINUTEN', 'SEKUNDEN']
+
+    units = [(str(days).zfill(2), labels[0]),
+             (str(hours).zfill(2), labels[1]),
+             (str(minutes).zfill(2), labels[2]),
+             (str(seconds).zfill(2), labels[3])]
     col_w = W // 4
 
     num_ref_bbox   = draw.textbbox((0, 0), '00', font=font_num)
@@ -98,7 +103,8 @@ def generate_image():
 
 @app.route('/countdown.png')
 def countdown():
-    buf      = generate_image()
+    lang     = request.args.get('lang', 'de')
+    buf      = generate_image(lang=lang)
     response = make_response(buf.read())
     response.headers['Content-Type']  = 'image/png'
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
